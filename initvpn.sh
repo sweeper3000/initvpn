@@ -8,9 +8,6 @@
 #
 # THIS SCRIPT IS INTENDED FOR USE ON AN APT BASED DISTRO ON A SUDO USER (NOT ROOT)
 
-    echo "THIS SCRIPT SHOULD NOT BE RUN ON MOSH AS DATA FROM THE INSTALLATION OUTPUTS WILL BE LOST. DO NOT CONTINUE ON MOSH UNLESS YOU KNOW WHAT YOU ARE DOING. PRESS ANY KEY TO CONTINUE."
-    read -n 1 s
-
 installOutline() {
     echo "Installing docker..."
     curl -sS https://get.docker.com/ | sh
@@ -27,6 +24,7 @@ sudo usermod -aG docker $USER
     echo "MAKE SURE TO PUT THE OUTPUT OF THE OUTLINE SCRIPT INTO THE MANAGER"
 
     echo "UNFORTUNATELY, THE OUTLINE SCRIPT CANNOT BE RUN IN THIS CURRENT SESSION WITHOUT DOCKER COMPLAINING. PLEASE EXIT THIS SESSION AND START A NEW ONE, THEN EXECUTE IT"
+}
 
 installAlgo() {
 
@@ -53,7 +51,12 @@ installAlgo() {
     deactivate
 }
 
-echo "(1) Install both Outline and Algo\n(2) Install Outline only\n(3) Install Algo only"
+echo "THIS SCRIPT SHOULD NOT BE RUN ON MOSH AS DATA FROM THE INSTALLATION OUTPUTS WILL BE LOST. DO NOT CONTINUE ON MOSH UNLESS YOU KNOW WHAT YOU ARE DOING. PRESS ANY KEY TO CONTINUE."
+read -n 1 s
+
+echo "(1) Install both Outline and Algo"
+echo "(2) Install Outline only"
+echo "(3) Install Algo only"
 read install
 if [ $install == 1 ]; then
     installOutline
