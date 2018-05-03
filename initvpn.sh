@@ -15,43 +15,59 @@
 #
 # THIS SCRIPT IS INTENDED FOR USE ON AN APT BASED DISTRO ON A SUDO USER (NOT ROOT)
 
-echo "THIS SCRIPT SHOULD NOT BE RUN ON MOSH AS DATA FROM THE INSTALLATION OUTPUTS WILL BE LOST. DO NOT CONTINUE ON MOSH UNLESS YOU KNOW WHAT YOU ARE DOING. PRESS ANY KEY TO CONTINUE."
-read -n 1 s
+    echo "THIS SCRIPT SHOULD NOT BE RUN ON MOSH AS DATA FROM THE INSTALLATION OUTPUTS WILL BE LOST. DO NOT CONTINUE ON MOSH UNLESS YOU KNOW WHAT YOU ARE DOING. PRESS ANY KEY TO CONTINUE."
+    read -n 1 s
+installOutline() {
+    echo "Installing docker..."
+    curl -sS https://get.docker.com/ | sh
 
-echo "Installing docker..."
-curl -sS https://get.docker.com/ | sh
+    echo "Downloading Outline..."
+    wget https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh
 
-echo Downloading Algo...
-git clone https://github.com/trailofbits/algo.git
-
-echo "Downloading Outline..."
-wget https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh
-
-echo "Adding current user to docker group"
+    echo "Adding current user to docker group"
 sudo usermod -aG docker $USER
 
-echo "Making Outline install script executable..."
-chmod +x install_server.sh
+    echo "Making Outline install script executable..."
+    chmod +x install_server.sh
 
-echo "MAKE SURE TO PUT THE OUTPUT OF THE OUTLINE SCRIPT INTO THE MANAGER"
+    echo "MAKE SURE TO PUT THE OUTPUT OF THE OUTLINE SCRIPT INTO THE MANAGER"
 
-cd algo
+    echo "UNFORTUNATELY, THE OUTLINE SCRIPT CANNOT BE RUN IN THIS CURRENT SESSION WITHOUT DOCKER COMPLAINING. PLEASE EXIT THIS SESSION AND START A NEW ONE, THEN EXECUTE IT"
 
-echo "Installing Algo dependancies..."
-sudo apt-get install build-essential libssl-dev libffi-dev python-dev python-pip python-setuptools python-virtualenv -y
-python -m virtualenv --python=`which python2` env && source env/bin/activate && python -m pip install -U pip && python -m pip install -r requirements.txt
+installAlgo() {
 
-echo "Enter the users for Algo in this file"
-vi config.cfg
-echo "Executing algo install script..."
-sudo ./algo
+    echo Downloading Algo...
+    git clone https://github.com/trailofbits/algo.git
 
-sudo ufw allow 1024:65535/udp
-sudo ufw allow 1024:65535/tcp
+    cd algo
 
-cd ~
+    echo "Installing Algo dependancies..."
+    sudo apt-get install build-essential libssl-dev libffi-dev python-dev python-pip python-setuptools python-virtualenv -y
+    python -m virtualenv --python=`which python2` env && source env/bin/activate && python -m pip install -U pip && python -m pip install -r requirements.txt
 
-# Deactivate virtualenv
-deactivate
+    echo "Enter the users for Algo in this file"
+    vim config.cfg
+    echo "Executing algo install script..."
+    sudo ./algo
 
-echo "UNFORTUNATELY, THE OUTLINE SCRIPT CANNOT BE RUN IN THIS CURRENT SESSION WITHOUT DOCKER COMPLAINING. PLEASE EXIT THIS SESSION AND START A NEW ONE, THEN EXECUTE IT"
+    sudo ufw allow 1024:65535/udp
+    sudo ufw allow 1024:65535/tcp
+
+    cd ~
+
+    # Deactivate virtualenv
+    deactivate
+}
+
+echo "(1) Install both Outline and Algo\n(2) Install Outline only\n(3) Install Algo only"
+read install
+if [ $install == 1 ]; then
+    installOutline
+    installAlgo
+elif [ $install == 2 ]; then
+    installOutline
+elif [ $install == 3 ]; then
+    installAlgo
+else 
+    echo "Invalid input"
+fi
