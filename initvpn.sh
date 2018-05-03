@@ -3,20 +3,14 @@
 # This script will install the following VPN servers: Algo and Outline
 # It will do the following:
 #
-# 1. Install docker
-# 2. Download Outline and Algo
-# 3. Add current user to the docker group
-# 4. Make Outline install script executable
-# 5. Go into algo directory, enter a virtualenv, and install dependancies
-# 6. Open algo user config file to add users
-# 7. Execute algo install script on exit on user config file
-# 8. Open ports 1024 - 65535 in both TCP and UDP
-# 9. Tell user to logout of ssh and login again and execute the Outline script
+# 1. Ask user if they want to install both Algo and Outline or just one of them
+# 2. Install all needed software and open firewalls if needed
 #
 # THIS SCRIPT IS INTENDED FOR USE ON AN APT BASED DISTRO ON A SUDO USER (NOT ROOT)
 
     echo "THIS SCRIPT SHOULD NOT BE RUN ON MOSH AS DATA FROM THE INSTALLATION OUTPUTS WILL BE LOST. DO NOT CONTINUE ON MOSH UNLESS YOU KNOW WHAT YOU ARE DOING. PRESS ANY KEY TO CONTINUE."
     read -n 1 s
+
 installOutline() {
     echo "Installing docker..."
     curl -sS https://get.docker.com/ | sh
