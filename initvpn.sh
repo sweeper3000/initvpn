@@ -16,10 +16,13 @@ installOutline() {
     wget https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh
 
     echo "Adding current user to docker group"
-sudo usermod -aG docker $USER
+    sudo usermod -aG docker $USER
 
     echo "Making Outline install script executable..."
     chmod +x install_server.sh
+
+    sudo ufw allow 1024:65535/udp
+    sudo ufw allow 1024:65535/tcp
 
     echo "MAKE SURE TO PUT THE OUTPUT OF THE OUTLINE SCRIPT INTO THE MANAGER"
 
@@ -41,9 +44,6 @@ installAlgo() {
     vim config.cfg
     echo "Executing algo install script..."
     sudo ./algo
-
-    sudo ufw allow 1024:65535/udp
-    sudo ufw allow 1024:65535/tcp
 
     cd ~
 
