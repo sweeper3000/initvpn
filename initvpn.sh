@@ -60,7 +60,7 @@ installAlgo() {
 }
 
 installOpenVPN() {
-    wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+    sudo wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
 }
 
 echo "THIS SCRIPT SHOULD NOT BE RUN ON MOSH AS DATA FROM THE INSTALLATION OUTPUTS WILL BE LOST. DO NOT CONTINUE ON MOSH UNLESS YOU KNOW WHAT YOU ARE DOING. PRESS ANY KEY TO CONTINUE."
