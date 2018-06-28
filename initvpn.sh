@@ -59,20 +59,29 @@ installAlgo() {
     cd ~
 }
 
+installOpenVPN() {
+    wget https://git.io/vpn -O openvpn-install.sh && bash openvpn-install.sh
+}
+
 echo "THIS SCRIPT SHOULD NOT BE RUN ON MOSH AS DATA FROM THE INSTALLATION OUTPUTS WILL BE LOST. DO NOT CONTINUE ON MOSH UNLESS YOU KNOW WHAT YOU ARE DOING. PRESS ANY KEY TO CONTINUE."
 read -n 1 s
 
-echo "(1) Install both Outline and Algo"
+echo "(1) Install Outline, Algo and OpenVPN"
 echo "(2) Install Outline only"
 echo "(3) Install Algo only"
+echo "(4) Install OpenVPN only"
 read install
+
 if [ $install == 1 ]; then
     installOutline
     installAlgo
+    installOpenVPN
 elif [ $install == 2 ]; then
     installOutline
 elif [ $install == 3 ]; then
     installAlgo
-else 
+elif [ $install == 4 ]; then
+    installOpenVPN
+else
     echo "Invalid input"
 fi
