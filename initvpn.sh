@@ -8,6 +8,10 @@
 #
 # THIS SCRIPT IS INTENDED FOR USE ON AN APT BASED DISTRO ON A SUDO USER (NOT ROOT)
 
+# DEFINE VARIABLES #
+####################
+user="$USER"
+
 installOutline() {
     echo "Installing docker..."
     curl -sS https://get.docker.com/ | sh
@@ -45,10 +49,14 @@ installAlgo() {
     echo "Executing algo install script..."
     sudo ./algo
 
-    cd ~
-
     # Deactivate virtualenv
     deactivate
+
+    # Make configs owned by current user
+    cd ~/algo/configs/
+    sudo chown -R $user:$user *
+    
+    cd ~
 }
 
 echo "THIS SCRIPT SHOULD NOT BE RUN ON MOSH AS DATA FROM THE INSTALLATION OUTPUTS WILL BE LOST. DO NOT CONTINUE ON MOSH UNLESS YOU KNOW WHAT YOU ARE DOING. PRESS ANY KEY TO CONTINUE."
