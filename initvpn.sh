@@ -8,10 +8,6 @@
 #
 # THIS SCRIPT IS INTENDED FOR USE ON AN APT BASED DISTRO ON A SUDO USER (NOT ROOT)
 
-# DEFINE VARIABLES #
-####################
-user="$USER"
-
 installOutline() {
     echo "Installing docker..."
     curl -sS https://get.docker.com/ | sh
@@ -54,7 +50,7 @@ installAlgo() {
 
     # Make configs owned by current user
     cd ~/algo/configs/
-    sudo chown -R $user:$user *
+    sudo chown -R $USER$USER *
     
     cd ~
 }
