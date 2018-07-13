@@ -50,7 +50,7 @@ installAlgo() {
 
     # Make configs owned by current user
     cd ~/algo/configs/
-    sudo chown -R $USER$USER *
+    sudo chown -R $USER:$USER *
     
     cd ~
 }
