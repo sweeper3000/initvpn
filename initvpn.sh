@@ -1,12 +1,13 @@
 #!/bin/bash
 # InitVPN
-# This script will install the following VPN servers: Algo and Outline
+# This script will give the choice to install the following VPN Servers: Outline, Algo or OpenVPN 
+#
 # It will do the following:
 #
-# 1. Ask user if they want to install both Algo and Outline or just one of them
+# 1. Ask user if they want to install all of the VPN servers or just one individual one
 # 2. Install all needed software and open firewalls if needed
 #
-# THIS SCRIPT IS INTENDED FOR USE ON AN APT BASED DISTRO ON A SUDO USER (NOT ROOT)
+# THIS SCRIPT ONLY SUPPORTS APT BASED DISTROS
 
 installOutline() {
     echo "Installing docker..."
