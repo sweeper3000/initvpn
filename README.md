@@ -7,7 +7,7 @@ A bash script that gives you the choice to install [Outline](https://getoutline.
 Run the following command to download it and execute it:
 
 ```bash
-wget https://raw.githubusercontent.com/sweeper3000/initvpn/master/initvpn.sh && chmod +x initvpn.sh && ./initvpn.sh
+$ wget https://raw.githubusercontent.com/sweeper3000/initvpn/master/initvpn.sh && chmod +x initvpn.sh && ./initvpn.sh
 ```
 
 ## Choosing a VPN
