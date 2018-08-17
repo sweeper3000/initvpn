@@ -1,5 +1,5 @@
 # initvpn
-A bash script that gives you the choice to install [Outline](https://getoutline.org/en/home), [Algo](https://github.com/trailofbits/algo), or [OpenVPN via this script](https://github.com/Nyr/openvpn-install). Or, you can install them all if you want.
+A bash script that gives you the choice to install [Outline](https://getoutline.org/en/home), [Algo](https://github.com/trailofbits/algo), [Wireguard](https://www.wireguard.com/) or [OpenVPN via this script](https://github.com/Nyr/openvpn-install). Or, you can install them all if you want.
 
 ## Usage
 **THIS SCRIPT IS INTENDED FOR USE WITH A NON-ROOT SUDO USER ON AN SSH SESSION. USING MOSH IS NOT RECOMMENDED UNLESS YOU ARE USING A TERMINAL THAT SAVES THE FULL OUTPUT!**
@@ -32,10 +32,21 @@ Algo is a set of scripts that deploy an IKEv2/IPSec VPN running on StrongSwan on
 - Setting up VPN connections on the client side uses only built in tools if possible
 - Android client connections use [Wireguard](https://www.wireguard.com/), a very fast, kernel-based protocol
 
-### OpenVPN
-OpenVPN is the most famous VPN of the three, and it's become the de-facto VPN of choice.
+### Wireguard
+Wireguard is a new VPN protocol that's designed to be more efficient than other VPN software such as OpenVPN or IPSec.
 
-### Highlights
+**Please note the following: Wireguard is installed as part of Algo, and therefore the standalone Wireguard won't be installed on the install everything option. Wireguard is also under very active development, so the protocol could see major changes. Use at your own risk. The only platforms with offical clients are Android and Linux**
+
+#### Highlights
+- Very efficient
+- Low impact on battery life in my experience
+- Setup is easy, it's almost like SSH: just exchange keys and tell it where to go
+- Quiet protocol: while many VPN clients transmit keepalives constantly, Wireguard does not. It will only transmit data if it needs to.
+
+### OpenVPN
+OpenVPN is the most famous VPN of the three, and it's become the de-facto VPN of choice. 
+
+#### Highlights
 - Has software for every device
 - Uses TLS for data transport, encryption and integrity
 - Supports TCP or UDP
