@@ -70,9 +70,9 @@ echo "(4) Install OpenVPN only"
 read install
 
 if [ $install == 1 ]; then
+    installOpenVPN
     installOutline
     installAlgo
-    installOpenVPN
 elif [ $install == 2 ]; then
     installOutline
 elif [ $install == 3 ]; then
