@@ -76,7 +76,7 @@ if [ $install == 1 ]; then
     installAlgo
 
     echo "=== NOTES ==="
-    echo "OpenVPN: your .ovpn file is in this directory"
+    echo "OpenVPN: your .ovpn file is in this directory. Run the script openvpn-install.sh as root to add or revoke users or to uninstall OpenVPN."
     echo "Outline: If you cannot see the secret highlighted in green, the secret for the manager is stored in shadowbox/access.txt. You will have to format it correctly."
     echo "Algo VPN: The configurations are stored in algo/configs/$public_ip/. Record the password that Algo has given you as you will need it to install certain configurations."
 elif [ $install == 2 ]; then
